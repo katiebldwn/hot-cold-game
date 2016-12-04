@@ -6,14 +6,22 @@ export const guessNumber = number => ({
 });
 
 export const NEW_NUMBER = 'NEW_NUMBER';
-export const newNumber = (1, 100) => ({
-    type: NEW_NUMBER,
-
+export const newNumber = () => ({
+    type: NEW_NUMBER
 });
 
 export const COMP_NUMBERS = 'COMP_NUMBERS';
-export const compareNumbers = (guess, answer) ({
+export const compareNumbers = (guess) => ({
     type: COMP_NUMBERS,
-    guess,
-    answer
+    guess
+});
+
+export const SHOW_MODAL = 'SHOW_MODAL';
+export const showModal = () => ({
+    type: SHOW_MODAL
+});
+
+export const NEW_GAME = 'NEW_GAME';
+export const newGame = () => ({
+    type: NEW_GAME
 });
