@@ -2,7 +2,7 @@ import * as actions from '../actions/index';
 
 const initialState = {
     number: Math.floor(Math.random() * 100) + 1,
-    guesses: [],
+    guesses: ['2'],
     winner: false,
     distanceFeedback: "",
     directionFeedback: "",

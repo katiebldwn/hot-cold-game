@@ -11,7 +11,7 @@ export class GuessList extends React.Component {
         return (
             <div className="guess-list">
                 {this.props.guesses.map((guess, index) => (
-                    <p className="guess">{guess}</p>
+                    <span className="guess" key={index}>{guess}</span>
                 ))}
             </div>
         )
