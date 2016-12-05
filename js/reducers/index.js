@@ -2,7 +2,7 @@ import * as actions from '../actions/index';
 
 const initialState = {
     number: Math.floor(Math.random() * 100) + 1,
-    guesses: ['2'],
+    guesses: [],
     winner: false,
     distanceFeedback: "",
     directionFeedback: "",
@@ -12,9 +12,10 @@ const initialState = {
 
 export const hotColdReducer = (state=initialState, action) => {
     if (action.type === actions.GUESS_NUMBER) {
-        let guessArr = state.guesses;
+        let guessArr = [];
         guessArr.push(action.number);
-        return Object.assign({}, state, {guesses: guessArr})
+        let tempArr = guessArr.concat(state.guesses);
+        return Object.assign({}, state, {guesses: tempArr})
     }
     else if (action.type === actions.NEW_NUMBER) {
         return Object.assign({}, state, {number: Math.floor(Math.random() * 100) + 1, distanceFeedback: "Let's Play!"})
