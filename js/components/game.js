@@ -16,14 +16,17 @@ class Game extends React.Component {
             actions.showModal()
         );
     }
+    
+    //This button will display Modal Component
+    //<button onClick={this.showModal}>Button</button>
 
-    render() {        
+    render() {
         return (
             <div className="game">
                 <h1>HOT and COLD</h1>
                 {this.props.modalVisible ? (<Modal />) : ""}
                 <Board />
-                <button onClick={this.showModal}>Button</button>
+
             </div>
         )
     }

@@ -4,7 +4,7 @@ const initialState = {
     number: Math.floor(Math.random() * 100) + 1,
     guesses: [],
     winner: false,
-    distanceFeedback: "",
+    distanceFeedback: "Make Your Guess!",
     directionFeedback: "",
     distance: null,
     modalVisible: false
@@ -29,11 +29,11 @@ export const hotColdReducer = (state=initialState, action) => {
         let myObj = Object.assign({}, state);
         if (state.distance !== null) {
             if (absDiff < state.distance) {
-                myObj = Object.assign({}, myObj, {directionFeedback: "Getting Warmer"})
+                myObj = Object.assign({}, myObj, {directionFeedback: "and Getting Warmer!"})
             } else if (absDiff === state.distance) {
-                myObj = Object.assign({}, myObj, {directionFeedback: ""})
+                myObj = Object.assign({}, myObj, {directionFeedback: "and The Same Distance Away!"})
             } else {
-                myObj = Object.assign({}, myObj, {directionFeedback: "Getting Colder"})
+                myObj = Object.assign({}, myObj, {directionFeedback: "and Getting Colder!"})
             }
         }
         if(diff === 0) {

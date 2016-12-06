@@ -2,6 +2,8 @@ import React from 'react';
 import {connect}  from 'react-redux';
 import * as actions from '../actions/index';
 import GuessList from './guess-list';
+import GuessNumber from './guess-number';
+import Feedback from './feedback';
 
 export class Board extends React.Component {
     constructor(props) {
@@ -16,23 +18,31 @@ export class Board extends React.Component {
         );
     }
 
-    handleSubmit(event) {        
+    compareNumbers(number) {
+        this.props.dispatch(
+            actions.compareNumbers(number)
+        );
+    }
+
+    handleSubmit(event) {
         event.preventDefault();
-        this.guessNumber(event.target.guessInput.value)
+        const guess = event.target.guessInput.value;
+        this.guessNumber(guess);
+        this.compareNumbers(guess);
     }
 
     render() {
-        console.log('Board:', this.props)
+      console.log(this.props)
         return (
+
             <div className="board">
-                <div className="board-heading">
-                    Make your Guess!
-                </div>
+                <Feedback  distanceFeedback={this.props.distanceFeedback} directionFeedback={this.props.directionFeedback} />
                 <form onSubmit={this.handleSubmit}>
                     <input type="number" name="guessInput" placeholder="Enter your Guess" />
                     <button type="submit">Guess</button>
                 </form>
-                <GuessList guesses={this.props.guessArr}/>
+                <GuessNumber guesses={this.props.guessArr} />
+                <GuessList guesses={this.props.guessArr} />
             </div>
         )
     }
@@ -49,7 +59,9 @@ export class Board extends React.Component {
 const mapStateToProps = (state) => {
     return {
         guessArr: state.guesses,
-        state: state
+        state: state,
+        distanceFeedback: state.distanceFeedback,
+        directionFeedback: state.directionFeedback
     }
 }
 
