@@ -16,7 +16,13 @@ class Game extends React.Component {
             actions.showModal()
         );
     }
-    
+
+    newGame() {
+        this.props.dispatch(
+            actions.newGame()
+        );
+    }
+
     //This button will display Modal Component
     //<button onClick={this.showModal}>Button</button>
 
@@ -26,7 +32,7 @@ class Game extends React.Component {
                 <h1>HOT and COLD</h1>
                 {this.props.modalVisible ? (<Modal />) : ""}
                 <Board />
-
+                <button onClick={this.newGame}>New Game</button>
             </div>
         )
     }

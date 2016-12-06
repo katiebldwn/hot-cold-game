@@ -23,33 +23,18 @@ export const hotColdReducer = (state=initialState, action) => {
     else if (action.type === actions.SHOW_MODAL) {
         return Object.assign({}, state, {modalVisible: !state.modalVisible})
     }
-    else if (action.type === actions.COMP_NUMBERS) {
-        const diff = action.guess - state.number;
-        const absDiff = Math.abs(diff);
-        let myObj = Object.assign({}, state);
-        if (state.distance !== null) {
-            if (absDiff < state.distance) {
-                myObj = Object.assign({}, myObj, {directionFeedback: "and Getting Warmer!"})
-            } else if (absDiff === state.distance) {
-                myObj = Object.assign({}, myObj, {directionFeedback: "and The Same Distance Away!"})
-            } else {
-                myObj = Object.assign({}, myObj, {directionFeedback: "and Getting Colder!"})
-            }
-        }
-        if(diff === 0) {
-            return Object.assign({}, state, {winner: true, distanceFeedback: "You Win!", directionFeedback: "",  distance: 0})
-        } else if (diff !== 0) {
-            if (absDiff <= 5) {
-                myObj = Object.assign({}, myObj, {distanceFeedback: "HOT", distance: absDiff})
-            } else if (absDiff <= 15) {
-                myObj = Object.assign({}, myObj, {distanceFeedback: "Warm", distance: absDiff})
-            } else if (absDiff <= 30) {
-                myObj = Object.assign({}, myObj, {distanceFeedback: "Chilly", distance: absDiff})
-            } else if (absDiff <= 50) {
-                myObj = Object.assign({}, myObj, {distanceFeedback: "Cold", distance: absDiff})
-            }
-        }
-        return Object.assign({}, state, myObj);
+    else if (action.type === actions.NEW_GAME) {
+      return Object.assign({}, state, initialState)
     }
+    else if (action.type === actions.UPDATE_DISTANCE) {
+        return Object.assign({}, state, {distance: action.distance});
+    }
+    else if (action.type === actions.UPDATE_DIST_FEEDBACK){
+      return Object.assign({}, state, {distanceFeedback: action.distanceFeedback})
+    }
+    else if (action.type === actions.UPDATE_DIR_FEEDBACK){
+      return Object.assign({}, state, {directionFeedback: action.directionFeedback})
+    }
+
     return state;
 };

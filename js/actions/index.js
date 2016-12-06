@@ -25,3 +25,21 @@ export const NEW_GAME = 'NEW_GAME';
 export const newGame = () => ({
     type: NEW_GAME
 });
+
+export const UPDATE_DIST_FEEDBACK = 'UPDATE_DIST_FEEDBACK';
+export const updateDistFeedback = (distanceFeedback) => ({
+  type: UPDATE_DIST_FEEDBACK,
+  distanceFeedback
+});
+
+export const UPDATE_DIR_FEEDBACK = 'UPDATE_DIR_FEEDBACK';
+export const updateDirFeedback = (directionFeedback) => ({
+  type: UPDATE_DIR_FEEDBACK,
+  directionFeedback
+});
+
+export const UPDATE_DISTANCE = 'UPDATE_DISTANCE';
+export const updateDistance = (distance) => ({
+  type: UPDATE_DISTANCE,
+  distance
+});
