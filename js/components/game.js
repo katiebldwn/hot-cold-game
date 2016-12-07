@@ -9,6 +9,7 @@ class Game extends React.Component {
     constructor(props) {
         super(props);
         this.showModal = this.showModal.bind(this);
+        this.newGame = this.newGame.bind(this);
     }
 
     showModal() {

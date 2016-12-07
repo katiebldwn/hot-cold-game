@@ -40,7 +40,6 @@ export class Board extends React.Component {
     }
 
     updateDistance(distance) {
-      console.log('dist:', distance)
         this.props.dispatch(
             actions.updateDistance(distance)
         );
@@ -49,14 +48,16 @@ export class Board extends React.Component {
     handleSubmit(event) {
       event.preventDefault();
       const guess = event.target.guessInput.value;
-      this.guessNumber(guess);
+
       let distance = this.props.state.distance;
       event.target.guessInput.value = "";
       const diff = guess - this.props.state.number;
       const absDiff = Math.abs(diff);
-      console.log(absDiff)
+      console.log("guessArr:", this.props.guessArr)
       if (this.props.guessArr.includes(guess)) {
-        this.updateDistFeedback("You Already Guessed That", "");
+        this.updateDirFeedback("");
+        this.updateDistFeedback("You Already Guessed That");
+        return;
       }
       else if (this.props.state.distance !== null) {
         if (absDiff < this.props.state.distance) {
@@ -72,6 +73,8 @@ export class Board extends React.Component {
       }
       if(diff === 0) {
         let distanceFeedback = "You Win!";
+        let directionFeedback = "";
+        this.updateDirFeedback(directionFeedback);
         this.updateDistFeedback(distanceFeedback);
       } else {
           if (absDiff <= 5) {
@@ -87,7 +90,7 @@ export class Board extends React.Component {
             let distanceFeedback = "COLD"
             this.updateDistFeedback(distanceFeedback);
           }
-          // this.updateFeedback(distanceFeedback, directionFeedback);
+          this.guessNumber(guess);
           this.updateDistance(absDiff);
         }
 
