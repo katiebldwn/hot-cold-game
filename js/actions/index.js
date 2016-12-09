@@ -1,4 +1,5 @@
-//guess a number, generate new random number, compare numbers
+import fetch from 'isomorphic-fetch';
+
 export const GUESS_NUMBER = 'GUESS_NUMBER';
 export const guessNumber = number => ({
     type: GUESS_NUMBER,
@@ -43,3 +44,33 @@ export const updateDistance = (distance) => ({
   type: UPDATE_DISTANCE,
   distance
 });
+
+export const UPDATE_FEWEST_STATE = 'UPDATE_FEWEST_STATE';
+export const udpateFewestState = (number) => ({
+  type: UPDATE_FEWEST_STATE,
+  number
+});
+
+// export const GET_FEWEST = 'GET_FEWEST';
+export const getFewest = () => {
+  return dispatch => {
+    return fetch('http://localhost:8080/fewest-guesses')
+    .then(response => response.json())
+    .then(number => dispatch(updateFewestState(number)))
+  }
+}
+
+export const postFewest = () => {
+  return dispatch => {
+    return fetch('http://localhost:8080/fewest-guesses', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: item
+      })
+    }).then(response => response.json())
+    .then(number => dispatch(updateFewestState(number)))
+  }
+}

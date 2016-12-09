@@ -7,7 +7,8 @@ const initialState = {
     distanceFeedback: "Make Your Guess!",
     directionFeedback: "",
     distance: null,
-    modalVisible: false
+    modalVisible: false,
+    fewest: null
 };
 
 export const hotColdReducer = (state=initialState, action) => {
@@ -29,11 +30,14 @@ export const hotColdReducer = (state=initialState, action) => {
     else if (action.type === actions.UPDATE_DISTANCE) {
         return Object.assign({}, state, {distance: action.distance});
     }
-    else if (action.type === actions.UPDATE_DIST_FEEDBACK){
+    else if (action.type === actions.UPDATE_DIST_FEEDBACK) {
       return Object.assign({}, state, {distanceFeedback: action.distanceFeedback})
     }
-    else if (action.type === actions.UPDATE_DIR_FEEDBACK){
+    else if (action.type === actions.UPDATE_DIR_FEEDBACK) {
       return Object.assign({}, state, {directionFeedback: action.directionFeedback})
+    }
+    else if (action.type === actions.UPDATE_FEWEST_STATE) {
+      return Object.assign({}, state, {fewest: action.number})
     }
 
     return state;

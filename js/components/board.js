@@ -1,5 +1,5 @@
 import React from 'react';
-import {connect}  from 'react-redux';
+import { connect }  from 'react-redux';
 import * as actions from '../actions/index';
 import GuessList from './guess-list';
 import GuessCount from './guess-count';
@@ -13,6 +13,7 @@ export class Board extends React.Component {
         this.updateDirFeedback = this.updateDirFeedback.bind(this);
         this.updateDistFeedback = this.updateDistFeedback.bind(this);
         this.updateDistance = this.updateDistance.bind(this);
+        this.getFewest = this.getFewest.bind(this);
     }
 
     guessNumber(number) {
@@ -43,6 +44,12 @@ export class Board extends React.Component {
         this.props.dispatch(
             actions.updateDistance(distance)
         );
+    }
+
+    getFewest() {
+      this.props.dispatch(
+        actions.getFewest()
+      )
     }
 
     handleSubmit(event) {
@@ -76,6 +83,7 @@ export class Board extends React.Component {
         let directionFeedback = "";
         this.updateDirFeedback(directionFeedback);
         this.updateDistFeedback(distanceFeedback);
+
       } else {
           if (absDiff <= 5) {
             let distanceFeedback = "HOT"
