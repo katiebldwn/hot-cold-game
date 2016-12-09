@@ -4,6 +4,7 @@ import * as actions from '../actions/index';
 import GuessList from './guess-list';
 import GuessCount from './guess-count';
 import Feedback from './feedback';
+const { username, password } = require('../config');
 
 export class Board extends React.Component {
     constructor(props) {
@@ -106,9 +107,7 @@ export class Board extends React.Component {
     }
 
     render() {
-      console.log(this.props)
         return (
-
             <div className="board">
                 <Feedback  distanceFeedback={this.props.distanceFeedback} directionFeedback={this.props.directionFeedback} />
                 <form onSubmit={this.handleSubmit}>
