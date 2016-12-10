@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 
 const port = 3000;
 
-const url = `mongodb://brianb:brianb@ds127958.mlab.com:27958/redux-hotcold`;
+const url = `mongodb://${username}:${password}@ds127958.mlab.com:27958/redux-hotcold`;
 mongoose.connect(url);
 
 app.get('/fewest-guesses', function(req, res) {
