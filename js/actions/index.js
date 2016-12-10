@@ -46,7 +46,7 @@ export const updateDistance = (distance) => ({
 });
 
 const UPDATE_FEWEST_STATE = 'UPDATE_FEWEST_STATE';
-const udpateFewestState = (number) => ({
+const updateFewestState = (number) => ({
   type: UPDATE_FEWEST_STATE,
   number
 });
@@ -71,7 +71,11 @@ export const postFewest = (number) => {
       body: JSON.stringify({
         fewest: number
       })
-    }).then(response => response.json())
-    .then(data => dispatch(updateFewestState(data.fewest)))
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      dispatch(updateFewestState(data.fewest))
+    })
   }
 }
