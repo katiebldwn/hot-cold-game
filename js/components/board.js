@@ -4,7 +4,6 @@ import * as actions from '../actions/index';
 import GuessList from './guess-list';
 import GuessCount from './guess-count';
 import Feedback from './feedback';
-const { username, password } = require('../config');
 
 export class Board extends React.Component {
     constructor(props) {
@@ -14,7 +13,8 @@ export class Board extends React.Component {
         this.updateDirFeedback = this.updateDirFeedback.bind(this);
         this.updateDistFeedback = this.updateDistFeedback.bind(this);
         this.updateDistance = this.updateDistance.bind(this);
-        this.getFewest = this.getFewest.bind(this);
+        // this.getFewest = this.getFewest.bind(this);
+        console.log(props);
     }
 
     guessNumber(number) {
@@ -47,11 +47,11 @@ export class Board extends React.Component {
         );
     }
 
-    getFewest() {
-      this.props.dispatch(
-        actions.getFewest()
-      )
-    }
+    // getFewest(distance) {
+    //     this.props.dispatch(
+    //         actions.getFewest()
+    //     );
+    // }
 
     handleSubmit(event) {
       event.preventDefault();
@@ -114,21 +114,34 @@ export class Board extends React.Component {
                     <input type="number" name="guessInput" placeholder="Enter your Guess" />
                     <button type="submit">Guess</button>
                 </form>
+                <button onClick={() => this.props.getFewest()}>Get Fewest</button>
+                <button onClick={() => this.props.postFewest(5)}>Post Fewest</button>
                 <GuessCount guesses={this.props.guessArr} />
                 <GuessList guesses={this.props.guessArr} />
             </div>
         )
     }
 }
+// <button onClick={() => this.props.getFewest()}>Get Fewest</button>
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getFewest: () => {
+      return dispatch(actions.getFewest())
+    },
+    postFewest: () => {
+      return dispatch(actions.postFewest())
+    }
+  }
+}
 
 const mapStateToProps = (state) => {
-    return {
-        guessArr: state.guesses,
-        state: state,
-        distanceFeedback: state.distanceFeedback,
-        directionFeedback: state.directionFeedback
-    }
+  return {
+    guessArr: state.guesses,
+    state: state,
+    distanceFeedback: state.distanceFeedback,
+    directionFeedback: state.directionFeedback
+  }
 }
 
 
-export default connect(mapStateToProps, null)(Board);
+export default connect(mapStateToProps, mapDispatchToProps)(Board);

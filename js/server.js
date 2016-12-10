@@ -1,17 +1,18 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const { username, password } = require('./config');
+// const username = require('./config');
+// const {password} = require('./config');
 const FewestGuesses = require('./models/guesses');
 const bodyParser = require('body-parser');
 
 
-const app = express();
+let app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const port = 8080;
+const port = 3000;
 
-const url = `mongodb://${username}:${password}@ds127958.mlab.com:27958/redux-hotcold`;
+const url = `mongodb://brianb:brianb@ds127958.mlab.com:27958/redux-hotcold`;
 mongoose.connect(url);
 
 app.get('/fewest-guesses', function(req, res) {
@@ -25,15 +26,15 @@ app.get('/fewest-guesses', function(req, res) {
 
 app.post('/fewest-guesses', function(req, res) {
   let guesses = new FewestGuesses();
-  guesses.fewest = req.body.fewest
-
-  guesses.save(err => {
+  guesses.fewest = req.body.fewest;
+  guesses.save( (err, guess) => {
     if(err) res.send(err);
     FewestGuesses.find({}, (err, data) => {
       if(err) res.send(err);
-      res.json(data);
+      res.json(201, data);
+    })
   })
 })
 app.listen(port, function() {
-  console.log('listening')
+  console.log("listening on port 3000")
 })
