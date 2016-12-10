@@ -56,7 +56,10 @@ export const getFewest = () => {
   return dispatch => {
     return fetch('http://localhost:3000/fewest-guesses')
     .then(response => response.json())
-    .then(data => dispatch(updateFewestState(data.fewest)))
+    .then(data => {
+      console.log(data)
+      dispatch(updateFewestState(data.fewest))
+    })
   }
 }
 
@@ -64,10 +67,11 @@ export const postFewest = (number) => {
   // console.log(this.updateFewestState)
   return dispatch => {
     return fetch('http://localhost:3000/fewest-guesses', {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
+      // credentials: 'same-origin', // you need to add this line
       body: JSON.stringify({
         fewest: number
       })

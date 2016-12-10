@@ -115,7 +115,7 @@ export class Board extends React.Component {
                     <button type="submit">Guess</button>
                 </form>
                 <button onClick={() => this.props.getFewest()}>Get Fewest</button>
-                <button onClick={() => this.props.postFewest(5)}>Post Fewest</button>
+                <button onClick={() => this.props.postFewest(10)}>Post Fewest</button>
                 <GuessCount guesses={this.props.guessArr} />
                 <GuessList guesses={this.props.guessArr} />
             </div>

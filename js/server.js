@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
-// const username = require('./config');
-// const {password} = require('./config');
+const username = require('./config').username;
+const password = require('./config').password;
 const FewestGuesses = require('./models/guesses');
 const bodyParser = require('body-parser');
 
@@ -10,8 +10,8 @@ let app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+const id = "584c90125c7cb208f0a4aa5d"
 const port = 3000;
-
 const url = `mongodb://${username}:${password}@ds127958.mlab.com:27958/redux-hotcold`;
 mongoose.connect(url);
 
@@ -24,14 +24,28 @@ app.get('/fewest-guesses', function(req, res) {
   })
 })
 
-app.post('/fewest-guesses', function(req, res) {
-  let guesses = new FewestGuesses();
-  guesses.fewest = req.body.fewest;
-  guesses.save( (err, guess) => {
+// app.post('/fewest-guesses', function(req, res) {
+//   let guesses = new FewestGuesses();
+//   guesses.fewest = req.body.fewest;
+//   guesses.save( (err, guess) => {
+//     if(err) res.send(err);
+//     FewestGuesses.find({}, (err, data) => {
+//       if(err) res.send(err);
+//       res.json(201, data);
+//     })
+//   })
+// })
+
+app.put('/fewest-guesses', function(req, res) {
+
+  FewestGuesses.findById(id, function(err, guess) {
+    console.log("fewest:", req.body.fewest)
     if(err) res.send(err);
-    FewestGuesses.find({}, (err, data) => {
-      if(err) res.send(err);
-      res.json(201, data);
+    guess.fewest = req.body.fewest;
+    guess.save(function(err, updatedData) {
+      console.log("Updated", updatedData)
+      if (err) res.send(err);
+      res.json(updatedData);
     })
   })
 })
