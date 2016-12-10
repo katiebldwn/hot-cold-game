@@ -76,7 +76,7 @@ export class Board extends React.Component {
             this.props.updateDirFeedback(directionFeedback);
         } else {
             let directionFeedback = "and Getting Colder!";
-            this.updateDirFeedback(directionFeedback);
+            this.props.updateDirFeedback(directionFeedback);
         }
       }
       if(diff === 0) {
