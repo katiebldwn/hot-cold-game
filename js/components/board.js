@@ -8,44 +8,44 @@ import Feedback from './feedback';
 export class Board extends React.Component {
     constructor(props) {
         super(props);
-        this.guessNumber = this.guessNumber.bind(this);
+        // this.guessNumber = this.guessNumber.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.updateDirFeedback = this.updateDirFeedback.bind(this);
-        this.updateDistFeedback = this.updateDistFeedback.bind(this);
-        this.updateDistance = this.updateDistance.bind(this);
+        // this.updateDirFeedback = this.updateDirFeedback.bind(this);
+        // this.updateDistFeedback = this.updateDistFeedback.bind(this);
+        // this.updateDistance = this.updateDistance.bind(this);
         // this.getFewest = this.getFewest.bind(this);
         console.log(props);
     }
 
-    guessNumber(number) {
-        this.props.dispatch(
-            actions.guessNumber(number)
-        );
-    }
-
-    compareNumbers(number) {
-        this.props.dispatch(
-            actions.compareNumbers(number)
-        );
-    }
-
-    updateDirFeedback(directionFeedback) {
-        this.props.dispatch(
-            actions.updateDirFeedback(directionFeedback)
-        );
-    }
-
-    updateDistFeedback(distanceFeedback) {
-        this.props.dispatch(
-            actions.updateDistFeedback(distanceFeedback)
-        );
-    }
-
-    updateDistance(distance) {
-        this.props.dispatch(
-            actions.updateDistance(distance)
-        );
-    }
+    // guessNumber(number) {
+    //     this.props.dispatch(
+    //         actions.guessNumber(number)
+    //     );
+    // }
+    //
+    // compareNumbers(number) {
+    //     this.props.dispatch(
+    //         actions.compareNumbers(number)
+    //     );
+    // }
+    //
+    // updateDirFeedback(directionFeedback) {
+    //     this.props.dispatch(
+    //         actions.updateDirFeedback(directionFeedback)
+    //     );
+    // }
+    //
+    // updateDistFeedback(distanceFeedback) {
+    //     this.props.dispatch(
+    //         actions.updateDistFeedback(distanceFeedback)
+    //     );
+    // }
+    //
+    // updateDistance(distance) {
+    //     this.props.dispatch(
+    //         actions.updateDistance(distance)
+    //     );
+    // }
 
     // getFewest(distance) {
     //     this.props.dispatch(
@@ -63,17 +63,17 @@ export class Board extends React.Component {
       const absDiff = Math.abs(diff);
       console.log("guessArr:", this.props.guessArr)
       if (this.props.guessArr.includes(guess)) {
-        this.updateDirFeedback("");
-        this.updateDistFeedback("You Already Guessed That");
+        this.props.updateDirFeedback("");
+        this.props.updateDistFeedback("You Already Guessed That");
         return;
       }
       else if (this.props.state.distance !== null) {
         if (absDiff < this.props.state.distance) {
             let directionFeedback = "and Getting Warmer!";
-            this.updateDirFeedback(directionFeedback);
+            this.props.updateDirFeedback(directionFeedback);
         } else if (absDiff === this.props.state.distance) {
             let directionFeedback = "and The Same Distance Away!";
-            this.updateDirFeedback(directionFeedback);
+            this.props.updateDirFeedback(directionFeedback);
         } else {
             let directionFeedback = "and Getting Colder!";
             this.updateDirFeedback(directionFeedback);
@@ -82,25 +82,25 @@ export class Board extends React.Component {
       if(diff === 0) {
         let distanceFeedback = "You Win!";
         let directionFeedback = "";
-        this.updateDirFeedback(directionFeedback);
-        this.updateDistFeedback(distanceFeedback);
+        this.props.updateDirFeedback(directionFeedback);
+        this.props.updateDistFeedback(distanceFeedback);
 
       } else {
           if (absDiff <= 5) {
             let distanceFeedback = "HOT"
-            this.updateDistFeedback(distanceFeedback);
+            this.props.updateDistFeedback(distanceFeedback);
           } else if (absDiff <= 15) {
             let distanceFeedback = "Warm"
-            this.updateDistFeedback(distanceFeedback);
+            this.props.updateDistFeedback(distanceFeedback);
           } else if (absDiff <= 30) {
             let distanceFeedback = "Chilly"
-            this.updateDistFeedback(distanceFeedback);
+            this.props.updateDistFeedback(distanceFeedback);
           } else if (absDiff <= 50) {
             let distanceFeedback = "COLD"
-            this.updateDistFeedback(distanceFeedback);
+            this.props.updateDistFeedback(distanceFeedback);
           }
-          this.guessNumber(guess);
-          this.updateDistance(absDiff);
+          this.props.guessNumber(guess);
+          this.props.updateDistance(absDiff);
         }
 
 
@@ -130,6 +130,21 @@ const mapDispatchToProps = (dispatch) => {
     },
     postFewest: () => {
       return dispatch(actions.postFewest())
+    },
+    guessNumber(number) {
+      return dispatch(actions.guessNumber(number))
+    },
+    compareNumbers(number) {
+      return dispatch(actions.compareNumbers(number))
+    },
+    updateDirFeedback(directionFeedback) {
+      return dispatch(actions.updateDirFeedback(directionFeedback))
+    },
+    updateDistFeedback(distanceFeedback) {
+      return dispatch(actions.updateDistFeedback(distanceFeedback))
+    },
+    updateDistance(distance) {
+      return dispatch(actions.updateDistance(distance))
     }
   }
 }
