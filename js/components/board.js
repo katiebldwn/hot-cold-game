@@ -128,8 +128,8 @@ const mapDispatchToProps = (dispatch) => {
     getFewest: () => {
       return dispatch(actions.getFewest())
     },
-    postFewest: () => {
-      return dispatch(actions.postFewest())
+    postFewest: (number) => {
+      return dispatch(actions.postFewest(number))
     },
     guessNumber(number) {
       return dispatch(actions.guessNumber(number))
