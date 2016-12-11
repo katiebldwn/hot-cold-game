@@ -4,6 +4,7 @@ import * as actions from '../actions/index';
 import GuessList from './guess-list';
 import GuessCount from './guess-count';
 import Feedback from './feedback';
+import FewestCount from './fewest-count';
 
 export class Board extends React.Component {
     constructor(props) {
@@ -17,51 +18,16 @@ export class Board extends React.Component {
         console.log(props);
     }
 
-    // guessNumber(number) {
-    //     this.props.dispatch(
-    //         actions.guessNumber(number)
-    //     );
-    // }
-    //
-    // compareNumbers(number) {
-    //     this.props.dispatch(
-    //         actions.compareNumbers(number)
-    //     );
-    // }
-    //
-    // updateDirFeedback(directionFeedback) {
-    //     this.props.dispatch(
-    //         actions.updateDirFeedback(directionFeedback)
-    //     );
-    // }
-    //
-    // updateDistFeedback(distanceFeedback) {
-    //     this.props.dispatch(
-    //         actions.updateDistFeedback(distanceFeedback)
-    //     );
-    // }
-    //
-    // updateDistance(distance) {
-    //     this.props.dispatch(
-    //         actions.updateDistance(distance)
-    //     );
-    // }
-
-    // getFewest(distance) {
-    //     this.props.dispatch(
-    //         actions.getFewest()
-    //     );
-    // }
+    
 
     handleSubmit(event) {
       event.preventDefault();
       const guess = event.target.guessInput.value;
-
+      console.log(this.props)
       let distance = this.props.state.distance;
       event.target.guessInput.value = "";
       const diff = guess - this.props.state.number;
       const absDiff = Math.abs(diff);
-      console.log("guessArr:", this.props.guessArr)
       if (this.props.guessArr.includes(guess)) {
         this.props.updateDirFeedback("");
         this.props.updateDistFeedback("You Already Guessed That");
@@ -114,15 +80,15 @@ export class Board extends React.Component {
                     <input type="number" name="guessInput" placeholder="Enter your Guess" />
                     <button type="submit">Guess</button>
                 </form>
-                <button onClick={() => this.props.getFewest()}>Get Fewest</button>
-                <button onClick={() => this.props.postFewest(10)}>Post Fewest</button>
                 <GuessCount guesses={this.props.guessArr} />
+                <FewestCount fewest={this.props.fewest} />
                 <GuessList guesses={this.props.guessArr} />
             </div>
         )
     }
 }
 // <button onClick={() => this.props.getFewest()}>Get Fewest</button>
+// <button onClick={() => this.props.postFewest(10)}>Post Fewest</button>
 const mapDispatchToProps = (dispatch) => {
   return {
     getFewest: () => {
@@ -154,7 +120,8 @@ const mapStateToProps = (state) => {
     guessArr: state.guesses,
     state: state,
     distanceFeedback: state.distanceFeedback,
-    directionFeedback: state.directionFeedback
+    directionFeedback: state.directionFeedback,
+    fewest: state.fewest
   }
 }
 

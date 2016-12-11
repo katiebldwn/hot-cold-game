@@ -11,6 +11,11 @@ class Game extends React.Component {
         this.newGame = this.newGame.bind(this);
     }
 
+    componentWillMount() {
+      this.props.getFewest();
+      console.log(this.props)
+    }
+
     showModal() {
         this.props.dispatch(
             actions.showModal()
@@ -38,10 +43,18 @@ class Game extends React.Component {
     }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getFewest: () => {
+      return dispatch(actions.getFewest())
+    }
+  }
+}
 const mapStateToProps = (state) => {
     return {
-        modalVisible: state.modalVisible
+        modalVisible: state.modalVisible,
+        fewest: state.fewest
     }
 }
 
-export default connect(mapStateToProps, null)(Game);
+export default connect(mapStateToProps, mapDispatchToProps)(Game);

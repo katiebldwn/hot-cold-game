@@ -37,6 +37,7 @@ export const hotColdReducer = (state=initialState, action) => {
       return Object.assign({}, state, {directionFeedback: action.directionFeedback})
     }
     else if (action.type === actions.UPDATE_FEWEST_STATE) {
+      console.log('Test', action.number)
       return Object.assign({}, state, {fewest: action.number})
     }
 
