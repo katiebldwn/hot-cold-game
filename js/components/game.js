@@ -7,8 +7,6 @@ import Board from './board';
 class Game extends React.Component {
     constructor(props) {
         super(props);
-        this.showModal = this.showModal.bind(this);
-        this.newGame = this.newGame.bind(this);
     }
 
     componentWillMount() {
@@ -16,28 +14,17 @@ class Game extends React.Component {
       console.log(this.props)
     }
 
-    showModal() {
-        this.props.dispatch(
-            actions.showModal()
-        );
-    }
-
-    newGame() {
-        this.props.dispatch(
-            actions.newGame()
-        );
-    }
-
     //This button will display Modal Component
     //<button onClick={this.showModal}>Button</button>
 
     render() {
+      this.props.getFewest();
         return (
             <div className="game">
                 <h1>HOT and COLD</h1>
                 {this.props.modalVisible ? (<Modal />) : ""}
                 <Board />
-                <button onClick={this.newGame}>New Game</button>
+                <button onClick={this.props.newGame}>New Game</button>
             </div>
         )
     }
@@ -47,7 +34,13 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getFewest: () => {
       return dispatch(actions.getFewest())
-    }
+    },
+    newGame: () => {
+      return dispatch(actions.newGame())
+    },
+    showModal: () => {
+      return dispatch(actions.showModal())
+    },
   }
 }
 const mapStateToProps = (state) => {

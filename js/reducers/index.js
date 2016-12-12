@@ -9,26 +9,27 @@ const initialState = {
     distance: null,
     modalVisible: false,
     fewest: null
+    //what if right here you call getFewest???
 };
 
 export const hotColdReducer = (state=initialState, action) => {
     if (action.type === actions.GUESS_NUMBER) {
-        let guessArr = [];
-        guessArr.push(action.number);
-        let tempArr = guessArr.concat(state.guesses);
-        return Object.assign({}, state, {guesses: tempArr})
+      let guessArr = [];
+      guessArr.push(action.number);
+      let tempArr = guessArr.concat(state.guesses);
+      return Object.assign({}, state, {guesses: tempArr})
     }
     else if (action.type === actions.NEW_NUMBER) {
-        return Object.assign({}, state, {number: Math.floor(Math.random() * 100) + 1, distanceFeedback: "Let's Play!"})
+      return Object.assign({}, state, {number: Math.floor(Math.random() * 100) + 1, distanceFeedback: "Let's Play!"})
     }
     else if (action.type === actions.SHOW_MODAL) {
-        return Object.assign({}, state, {modalVisible: !state.modalVisible})
+      return Object.assign({}, state, {modalVisible: !state.modalVisible})
     }
     else if (action.type === actions.NEW_GAME) {
       return Object.assign({}, state, initialState)
     }
     else if (action.type === actions.UPDATE_DISTANCE) {
-        return Object.assign({}, state, {distance: action.distance});
+      return Object.assign({}, state, {distance: action.distance});
     }
     else if (action.type === actions.UPDATE_DIST_FEEDBACK) {
       return Object.assign({}, state, {distanceFeedback: action.distanceFeedback})
@@ -37,7 +38,6 @@ export const hotColdReducer = (state=initialState, action) => {
       return Object.assign({}, state, {directionFeedback: action.directionFeedback})
     }
     else if (action.type === actions.UPDATE_FEWEST_STATE) {
-      console.log('Test', action.number)
       return Object.assign({}, state, {fewest: action.number})
     }
 

@@ -45,8 +45,8 @@ export const updateDistance = (distance) => ({
   distance
 });
 
-const UPDATE_FEWEST_STATE = 'UPDATE_FEWEST_STATE';
-const updateFewestState = (number) => ({
+export const UPDATE_FEWEST_STATE = 'UPDATE_FEWEST_STATE';
+export const updateFewestState = (number) => ({
   type: UPDATE_FEWEST_STATE,
   number
 });
@@ -57,7 +57,6 @@ export const getFewest = () => {
     return fetch('http://localhost:3000/fewest-guesses')
     .then(response => response.json())
     .then(data => {
-      console.log(updateFewestState(data[0].fewest))
       dispatch(updateFewestState(data[0].fewest))
     })
   }
@@ -79,7 +78,7 @@ export const postFewest = (number) => {
     .then(response => response.json())
     .then(data => {
       console.log(data)
-      dispatch(updateFewestState(data[0].fewest))
+      dispatch(updateFewestState(data.fewest))
     })
   }
 }

@@ -18,7 +18,7 @@ export class Board extends React.Component {
         console.log(props);
     }
 
-    
+
 
     handleSubmit(event) {
       event.preventDefault();
@@ -28,6 +28,7 @@ export class Board extends React.Component {
       event.target.guessInput.value = "";
       const diff = guess - this.props.state.number;
       const absDiff = Math.abs(diff);
+      this.props.updateDistFeedback("");
       if (this.props.guessArr.includes(guess)) {
         this.props.updateDirFeedback("");
         this.props.updateDistFeedback("You Already Guessed That");
@@ -46,10 +47,14 @@ export class Board extends React.Component {
         }
       }
       if(diff === 0) {
+        let numGuesses = this.props.state.guesses.length;
         let distanceFeedback = "You Win!";
         let directionFeedback = "";
         this.props.updateDirFeedback(directionFeedback);
         this.props.updateDistFeedback(distanceFeedback);
+        if(numGuesses < this.props.fewest) {
+          this.props.postFewest(numGuesses + 1);
+        }
 
       } else {
           if (absDiff <= 5) {
@@ -80,6 +85,7 @@ export class Board extends React.Component {
                     <input type="number" name="guessInput" placeholder="Enter your Guess" />
                     <button type="submit">Guess</button>
                 </form>
+                <button onClick={() => this.props.getFewest()}>Get Fewest</button>
                 <GuessCount guesses={this.props.guessArr} />
                 <FewestCount fewest={this.props.fewest} />
                 <GuessList guesses={this.props.guessArr} />
