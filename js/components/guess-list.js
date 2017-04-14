@@ -17,10 +17,4 @@ class GuessList extends React.Component {
     }
 }
 
-// const mapStateToProps = (state) => {
-//     return {
-//         guesses: state.guesses
-//     }
-// }
-
 export default connect()(GuessList);

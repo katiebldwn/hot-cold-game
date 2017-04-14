@@ -1,18 +1,20 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const username = require('./config').username;
-const password = require('./config').password;
+// const username = require('./config').username;
+// const password = require('./config').password;
 const FewestGuesses = require('./models/guesses');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 
 let app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
 
-const id = "584c90125c7cb208f0a4aa5d"
+// const id = "584c90125c7cb208f0a4aa5d"
 const port = 3000;
-const url = `mongodb://${username}:${password}@ds127958.mlab.com:27958/redux-hotcold`;
+const url = `mongodb://user1:user1@ds153730.mlab.com:53730/hot-cold-game`;
 mongoose.connect(url);
 
 app.get('/fewest-guesses', function(req, res) {

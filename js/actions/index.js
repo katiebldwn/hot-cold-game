@@ -51,7 +51,6 @@ export const updateFewestState = (number) => ({
   number
 });
 
-// export const GET_FEWEST = 'GET_FEWEST';
 export const getFewest = () => {
   return dispatch => {
     return fetch('http://localhost:3000/fewest-guesses')
@@ -63,14 +62,12 @@ export const getFewest = () => {
 }
 
 export const postFewest = (number) => {
-  // console.log(this.updateFewestState)
   return dispatch => {
     return fetch('http://localhost:3000/fewest-guesses', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
-      // credentials: 'same-origin', // you need to add this line
       body: JSON.stringify({
         fewest: number
       })

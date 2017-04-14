@@ -14,17 +14,15 @@ class Game extends React.Component {
       console.log(this.props)
     }
 
-    //This button will display Modal Component
-    //<button onClick={this.showModal}>Button</button>
-
     render() {
       this.props.getFewest();
         return (
             <div className="game">
-                <h1>HOT and COLD</h1>
+                <h1>Hot or Cold</h1>
+                <h2>Numbers Guessing Game</h2>
                 {this.props.modalVisible ? (<Modal />) : ""}
                 <Board />
-                <button onClick={this.props.newGame}>New Game</button>
+                <button onClick={this.props.newGame}>New Game!</button>
             </div>
         )
     }

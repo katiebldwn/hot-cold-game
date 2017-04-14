@@ -9,12 +9,7 @@ import FewestCount from './fewest-count';
 export class Board extends React.Component {
     constructor(props) {
         super(props);
-        // this.guessNumber = this.guessNumber.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        // this.updateDirFeedback = this.updateDirFeedback.bind(this);
-        // this.updateDistFeedback = this.updateDistFeedback.bind(this);
-        // this.updateDistance = this.updateDistance.bind(this);
-        // this.getFewest = this.getFewest.bind(this);
         console.log(props);
     }
 
@@ -31,7 +26,7 @@ export class Board extends React.Component {
       this.props.updateDistFeedback("");
       if (this.props.guessArr.includes(guess)) {
         this.props.updateDirFeedback("");
-        this.props.updateDistFeedback("You Already Guessed That");
+        this.props.updateDistFeedback("That's a Repeated Guess!");
         return;
       }
       else if (this.props.state.distance !== null) {
@@ -39,7 +34,7 @@ export class Board extends React.Component {
             let directionFeedback = "and Getting Warmer!";
             this.props.updateDirFeedback(directionFeedback);
         } else if (absDiff === this.props.state.distance) {
-            let directionFeedback = "and The Same Distance Away!";
+            let directionFeedback = "and Getting Ever Closer!";
             this.props.updateDirFeedback(directionFeedback);
         } else {
             let directionFeedback = "and Getting Colder!";
@@ -48,7 +43,7 @@ export class Board extends React.Component {
       }
       if(diff === 0) {
         let numGuesses = this.props.state.guesses.length;
-        let distanceFeedback = "You Win!";
+        let distanceFeedback = "You Guessed It!";
         let directionFeedback = "";
         this.props.updateDirFeedback(directionFeedback);
         this.props.updateDistFeedback(distanceFeedback);
@@ -58,7 +53,7 @@ export class Board extends React.Component {
 
       } else {
           if (absDiff <= 5) {
-            let distanceFeedback = "HOT"
+            let distanceFeedback = "Hot Hot Hot"
             this.props.updateDistFeedback(distanceFeedback);
           } else if (absDiff <= 15) {
             let distanceFeedback = "Warm"
@@ -67,7 +62,7 @@ export class Board extends React.Component {
             let distanceFeedback = "Chilly"
             this.props.updateDistFeedback(distanceFeedback);
           } else if (absDiff <= 50) {
-            let distanceFeedback = "COLD"
+            let distanceFeedback = "Brrr, Freezing Cold"
             this.props.updateDistFeedback(distanceFeedback);
           }
           this.props.guessNumber(guess);
@@ -82,8 +77,8 @@ export class Board extends React.Component {
             <div className="board">
                 <Feedback  distanceFeedback={this.props.distanceFeedback} directionFeedback={this.props.directionFeedback} />
                 <form onSubmit={this.handleSubmit}>
-                    <input type="number" name="guessInput" placeholder="Enter your Guess" />
-                    <button type="submit">Guess</button>
+                    <input type="number" name="guessInput" placeholder="Enter your Guess Here!" />
+                    <button type="submit">Final Answer?</button>
                 </form>
                 <button onClick={() => this.props.getFewest()}>Get Fewest</button>
                 <GuessCount guesses={this.props.guessArr} />
@@ -94,7 +89,6 @@ export class Board extends React.Component {
     }
 }
 // <button onClick={() => this.props.getFewest()}>Get Fewest</button>
-// <button onClick={() => this.props.postFewest(10)}>Post Fewest</button>
 const mapDispatchToProps = (dispatch) => {
   return {
     getFewest: () => {

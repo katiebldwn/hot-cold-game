@@ -4,12 +4,11 @@ const initialState = {
     number: Math.floor(Math.random() * 100) + 1,
     guesses: [],
     winner: false,
-    distanceFeedback: "Make Your Guess!",
+    distanceFeedback: "Guess Away!",
     directionFeedback: "",
     distance: null,
     modalVisible: false,
     fewest: null
-    //what if right here you call getFewest???
 };
 
 export const hotColdReducer = (state=initialState, action) => {
