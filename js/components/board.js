@@ -77,10 +77,10 @@ export class Board extends React.Component {
             <div className="board">
                 <Feedback  distanceFeedback={this.props.distanceFeedback} directionFeedback={this.props.directionFeedback} />
                 <form onSubmit={this.handleSubmit}>
-                    <input type="number" name="guessInput" placeholder="Enter your Guess Here!" />
+                    <input type="number" name="guessInput" placeholder="Enter your Guess!" />
                     <button type="submit">Final Answer?</button>
                 </form>
-                <button onClick={() => this.props.getFewest()}>Get Fewest</button>
+                <button onClick={() => this.props.getFewest()}>Fewest Guesses</button>
                 <GuessCount guesses={this.props.guessArr} />
                 <FewestCount fewest={this.props.fewest} />
                 <GuessList guesses={this.props.guessArr} />

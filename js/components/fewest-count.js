@@ -9,7 +9,7 @@ class FewestCount extends React.Component {
     render(props) {
         return (
             <div className="guess-number">
-                <p className="guess-number-display">Fewest # of guesses: {this.props.fewest}</p>
+                <p className="guess-number-display">Fewest Guesses: {this.props.fewest}</p>
             </div>
         )
     }

@@ -1,7 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-// const username = require('./config').username;
-// const password = require('./config').password;
 const FewestGuesses = require('./models/guesses');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -26,17 +24,17 @@ app.get('/fewest-guesses', function(req, res) {
   })
 })
 
-// app.post('/fewest-guesses', function(req, res) {
-//   let guesses = new FewestGuesses();
-//   guesses.fewest = req.body.fewest;
-//   guesses.save( (err, guess) => {
-//     if(err) res.send(err);
-//     FewestGuesses.find({}, (err, data) => {
-//       if(err) res.send(err);
-//       res.json(201, data);
-//     })
-//   })
-// })
+app.post('/fewest-guesses', function(req, res) {
+  let guesses = new FewestGuesses();
+  guesses.fewest = req.body.fewest;
+  guesses.save( (err, guess) => {
+    if(err) res.send(err);
+    FewestGuesses.find({}, (err, data) => {
+      if(err) res.send(err);
+      res.json(201, data);
+    })
+  })
+})
 
 app.put('/fewest-guesses', function(req, res) {
 

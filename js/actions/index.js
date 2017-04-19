@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
 
+
 export const GUESS_NUMBER = 'GUESS_NUMBER';
 export const guessNumber = number => ({
     type: GUESS_NUMBER,
